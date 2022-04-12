@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+    <title>Alien attack</title>
+    <link rel="stylesheet" href="numberGuessing2.css">
+</head>
+
+<body>
+    <h1>Alien Attack!</h1>
+    <div id="stage">
+        <div id="background"></div>
+        <div id="cannon"></div>
+        <div id="missile"></div>
+        <div id="alien"></div>
+    </div>
+    <p id="output">Enter the X and Y position (0-350), then click fire.</p>
+    <input id="inputX" type="text" placeholder="X...">
+    <input id="inputY" type="text" placeholder="Y...">
+    <button>Fire!</button>
+</body>
+
+<script type="text/javascript">
+
+    // Game variable
+    var alienX = Math.floor(Math.random() * 350)
+    var alienY = 0
+    var guessX = 0;
+    var guessY = 0;
+    var shotsRemaining = 10;
+    var shotsMade = 0;
+    var gameState = "";
+    var gameWon = false;
+
+    //Game objects
+    var cannon = document.querySelector("#cannon");
+    var alien = document.querySelector("#alien");
+    var missile = document.querySelector("#missile");
+
+    // The input and output fields
+    var inputX = document.querySelector("#inputX");
+    var inputY = document.querySelector("#inputY");
+    var output = document.querySelector("#output");
+
+    //The button
+    var button = document.querySelector("button");
+    button.style.cursor = "pointer";
+    button.addEventListener("click", clickHandler, false); 
+
+    function clickHandler() 
+    { 
+    validateInput(); 
+    } 
+
+    function validateInput()
+    {
+        guessX = parseInt(inputX.value);
+
+        if(isNaN(guessX))
+        {
+            output.innerHTML = "Please enter a number.";
+        }
+        else if(guessX > 350)
+        {
+            output.innerHTNL = "Please enter a number less than 350.";
+        }
+        else
+        {
+            playGame();
+        }
+    }
+
+    function playGame()
+    {
+        // console.log(shotsMade)
+        shotsRemaining--;
+        shotsMade++;
+        gameState = "Shots: " + shotsMade + " ,Remaining: " + shotsRemaining;
+
+        guessX = parseInt(inputX.value);
+        guessY = parseInt(inputY.value);
+
+        //Find out whether guess range is in alien's area
+
+        if(guessX >= alienX && guessX <= alienX + 20)
+        {
+            //if guessX correct, then check guessY
+
+            if(guessY >= alienY && guessY <= alienY + 20)
+            {
+                gameWon = true;
+                endGame();
+            }      
+            
+        }
+        else
+        {
+            output.innerHTML = "Miss! " + gameState;
+            resetMissile();
+
+            //Check for end of the game
+            if(shotsRemaining < 1)
+            {
+                endGame();
+            }
+        }
+        //Update the alien's position if !gameWon
+     
+        if(!gameWon)
+    {
+        //Update alien's X position
+        alienX = Math.floor(Math.random() * 350);
+
+        // Add 30 to new Y to make alien approach earth
+        alienY += 37;
+    }
+
+    //Render the new game state
+    render();
+    "X: " + alienX;
+    "Y: " + alienY;
+    }
+
+    function render()
+    {
+        //Position the alien
+        alien.style.left = alienX + "px";
+        alien.style.top = alienY + "px";
+
+        //Position the cannon
+        cannon.style.left = guessX + "px";
+
+    
+        //Position the missile
+        missile.style.left = guessX + "px";
+        missile.style.top = guessY + "px";
+    }
+
+    function resetMissile()
+    {
+       //Position the missile
+       missile.style.left = guessX + "px";
+        missile.style.top = 360 + "px"; 
+    }
+
+    function endGame()
+    {
+        if(gameWon)
+        {
+            output.innerHTML
+            = "Hit! You saved the earth!" + "<br>"
+            + "It only took you " + shotsMade + " shots.";
+        }
+        else
+        {
+            output.innerHTML
+            = "You lost!" + "<br>"
+            + "The earth has been invaded!";
+
+        }
+
+        //Disable the fire button
+        button.removeEventListener("click", clickHandle, false);
+        button.disabled = true;
+
+        //Disable the input field
+        input.disabled = true;
+
+    }
+
+
+
+</script>
+
