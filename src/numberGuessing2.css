@@ -1,0 +1,59 @@
+#stage
+{
+position: relative;
+width: 400px;
+height: 400px;
+margin: auto;
+border: 1px dashed black;
+}
+
+#background
+{
+position: absolute;
+top: 0px;
+left: 0px;
+width: 400px;
+height: 400px;
+}
+
+#missile
+{
+position: absolute;
+top: 360px;
+left: 190px;
+width: 30px;
+height: 30px;
+z-index: -10;
+background-image: url(../images/missile.jpg);
+}
+
+#cannon
+{
+position: absolute;
+top: 330px;
+left: 190px;
+width: 50px;
+height: 66px;
+background-image: url(../images/cannon.jpg);
+}
+
+#alien
+{
+position: absolute;
+top: 0px;
+left: 350px;
+width: 50px;
+height: 40px;
+background-image: url(../images/alien.jpg);
+}
+
+*{
+    text-align: center; 
+}
+
+
+
+
+
+
+
