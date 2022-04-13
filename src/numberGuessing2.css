@@ -24,7 +24,7 @@ left: 190px;
 width: 30px;
 height: 30px;
 z-index: -10;
-background-image: url(../images/missile.jpg);
+background-image: url(/images/missile.jpg);
 }
 
 #cannon
@@ -34,7 +34,7 @@ top: 330px;
 left: 190px;
 width: 50px;
 height: 66px;
-background-image: url(../images/cannon.jpg);
+background-image: url(/images/cannon.jpg);
 }
 
 #alien
@@ -44,7 +44,7 @@ top: 0px;
 left: 350px;
 width: 50px;
 height: 40px;
-background-image: url(../images/alien.jpg);
+background-image: url(/images/alien.jpg);
 }
 
 *{
